@@ -1,11 +1,27 @@
 ## Docker commands used to build the application 
-# TODO: insert the docker build command
+docker build -t techtrends -f Dockerfile .
 
 ## Docker commands used to run the application
-# TODO: insert the docker run command
+docker run --name techtrends -p 7111:3111 -d techtrends:latest
 
 ## Docker commands used to get the application logs
-# TODO: insert the docker logs command
+docker logs techtrends
 
 ## Logs from the container running the TechTrends application
-# TODO: paste logs from the Docker container 
+ * Serving Flask app "app" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: off
+13/11/2021, 10:07:42,  * Running on http://0.0.0.0:3111/ (Press CTRL+C to quit)
+13/11/2021, 10:08:28, 172.17.0.1 - - [13/Nov/2021 10:08:28] "GET / HTTP/1.1" 200 -
+13/11/2021, 10:08:28, 172.17.0.1 - - [13/Nov/2021 10:08:28] "GET /static/css/main.css HTTP/1.1" 200 -
+13/11/2021, 10:08:28, 172.17.0.1 - - [13/Nov/2021 10:08:28] "GET /favicon.ico HTTP/1.1" 404 -
+13/11/2021, 10:08:36, Article "2020 CNCF Annual Report" retrieved!
+13/11/2021, 10:08:36, 172.17.0.1 - - [13/Nov/2021 10:08:36] "GET /1 HTTP/1.1" 200 -
+13/11/2021, 10:08:41, Article id "50" not found
+13/11/2021, 10:08:41, 172.17.0.1 - - [13/Nov/2021 10:08:41] "GET /50 HTTP/1.1" 404 -
+13/11/2021, 10:08:45, 172.17.0.1 - - [13/Nov/2021 10:08:45] "GET /create HTTP/1.1" 200 -
+13/11/2021, 10:08:50, New article "Test" created!
+13/11/2021, 10:08:50, 172.17.0.1 - - [13/Nov/2021 10:08:50] "POST /create HTTP/1.1" 302 -
+13/11/2021, 10:08:50, 172.17.0.1 - - [13/Nov/2021 10:08:50] "GET / HTTP/1.1" 200 -
