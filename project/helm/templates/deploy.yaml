@@ -1,15 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: techtrends
-  namespace: sandbox
+  name: {{ .Chart.Name }}
+  namespace: {{ .Values.namespace.name }} 
   labels:
-    app: techtrends
+    app: {{ .Chart.Name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: techtrends
+      app: {{ .Chart.Name }}
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -21,24 +23,24 @@ spec:
         app: techtrends
     spec:
       containers:
-        - image: juliangericke/techtrends:latest
-          imagePullPolicy: IfNotPresent
+        - image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           name: techtrends
           resources:
             requests:
-              cpu: 250m
-              memory: 64Mi
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory:  {{ .Values.resources.requests.memory }}
             limits:
-              cpu: 500m
-              memory: 128Mi
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
           ports:
-            - containerPort: 3111
+            - containerPort: {{ .Values.containerPort }}
               name: http
               protocol: TCP
           livenessProbe:
             failureThreshold: 3
             httpGet:
-              path: /healthz
+              path: {{ .Values.livenessProbe.path }}
               port: 3111
               scheme: HTTP
             initialDelaySeconds: 20
@@ -48,8 +50,8 @@ spec:
           readinessProbe:
             failureThreshold: 3
             httpGet:
-              path: /healthz
-              port: 3111
+              path: {{ .Values.readinessProbe.path }}
+              port: {{ .Values.containerPort }}
               scheme: HTTP
             initialDelaySeconds: 20
             periodSeconds: 10

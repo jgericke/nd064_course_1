@@ -5,8 +5,7 @@ metadata:
   namespace: sandbox
 spec:
   ports:
-    - name: http-4111
-      port: 4111
+    - port: 4111
       protocol: TCP
       targetPort: 3111
   selector:
