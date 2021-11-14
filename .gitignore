@@ -1,1 +1,3 @@
 *.code-workspace
+.vagrant
+*.log

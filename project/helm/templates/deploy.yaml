@@ -41,7 +41,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: {{ .Values.livenessProbe.path }}
-              port: 3111
+              port: {{ .Values.livenessProbe.port }}
               scheme: HTTP
             initialDelaySeconds: 20
             periodSeconds: 10
@@ -51,7 +51,7 @@ spec:
             failureThreshold: 3
             httpGet:
               path: {{ .Values.readinessProbe.path }}
-              port: {{ .Values.containerPort }}
+              port: {{ .Values.readinessProbe.port }}
               scheme: HTTP
             initialDelaySeconds: 20
             periodSeconds: 10

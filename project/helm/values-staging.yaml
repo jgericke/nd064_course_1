@@ -3,13 +3,8 @@ namespace:
 
 service:
   port: 5111
-  targetPort: 3111
-  protocol: TCP
-  type: ClusterIP
 
 image:
-  repository: juliangericke/techtrends
-  tag: latest
   pullPolicy: IfNotPresent
 
 replicaCount: 3
@@ -21,11 +16,3 @@ resources:
   limits:
     memory: 128Mi
     cpu: 500m
-
-containerPort: 3111
-
-livenessProbe:
-  path: /healthz
-
-readinessProbe:
-  path: /healthz

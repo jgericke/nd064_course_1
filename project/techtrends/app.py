@@ -1,6 +1,7 @@
 import sqlite3
 import functools
 import logging
+import sys
 from flask import (
     Flask,
     jsonify,
@@ -144,10 +145,13 @@ def metrics():
 # start the application on port 3111
 if __name__ == "__main__":
     # Defines logging configuration
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stderr_handler = logging.StreamHandler(sys.stderr)
+    handlers = [stderr_handler, stdout_handler]
     logging.basicConfig(
         level=logging.DEBUG,
         format="%(asctime)s, %(message)s",
         datefmt="%d/%m/%Y, %H:%M:%S",
-        handlers=[logging.StreamHandler()],
+        handlers=handlers,
     )
     app.run(host="0.0.0.0", port="3111")
